@@ -1,0 +1,15 @@
+Hi  {FNAME}, {LNAME} :
+<br/>
+
+Welcome to HIS family, Your registration is almost completed.Plese use below details to unlock your account.<br/>
+<br/>
+
+Temporary Password : {TEMP-PWD}<br/>
+<br/>
+
+<a href='http://localhost:2020/unlockAcc?email={EMAIL}'>
+Click Here To Unlock Your Account</a> <br/>
+<br/>
+
+Thanks & Regards,<br/>
+HIS Team.<br/>
