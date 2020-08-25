@@ -30,6 +30,10 @@
 					<td><form:input path="email" /></td>
 				</tr>
 				<tr>
+					<td><form:label path="pazzword" /><b>Password:</b>
+					<td><form:input path="pazzword" /></td>
+				</tr>
+				<tr>
 					<td><form:label path="gender" /><b>Gender:</b>
 					<td><form:radiobutton path="gender" value="MALE" />MALE <form:radiobutton
 							path="gender" value="FEMALE" />FEMALE</td>
@@ -40,6 +44,14 @@
 							<form:option value="">--Select--</form:option>
 							<form:options items="${roles}" />
 						</form:select></td>
+				</tr>
+				<tr>
+					<td><form:label path="accountStatus" /><b>Account Status:</b>
+					<td><form:input path="accountStatus" readonly="true"/></td>
+				</tr>
+				<tr>
+					<td><form:label path="accountState" /><b>Account State:</b>
+					<td><form:input path="accountState" readonly="true"/></td>
 				</tr>
 				<tr>
 					<td></td>

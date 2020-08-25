@@ -16,7 +16,7 @@ spring:  h2:    console:      enabled: true
     host: smtp.gmail.com
     port: 587
     username: springboot18@gmail.com
-    password: springboot@
+    password: 
     
 # Other Mail Properties
     properties:

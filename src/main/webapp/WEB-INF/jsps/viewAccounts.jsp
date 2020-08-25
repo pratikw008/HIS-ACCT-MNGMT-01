@@ -17,7 +17,7 @@
 <script type="text/javascript">
 $(document).ready(function() {
 
-	$("#role").change(function(){
+$("#role").change(function(){
 $("#user_table").empty();
 		$("#role").find('table').remove();
 		var role=$("#role").val();
@@ -34,7 +34,7 @@ $("#user_table").empty();
                         	var state = value.accountState;
 
                             if(state ==='ACTIVE'){
-								action='<a href=edit?id='+value.userId+'>Edit</a>' +'||'+ '<a href=delete?id='+value.userId+'>Delete</a>';
+								action='<a href=edit?id='+value.userId+'>Edit</a>' +'||'+ '<a href=delete?id='+value.userId+' onClick=return deleteConfirm()>Delete</a>';
 							} 
 							else{
 	                        	action='<a href=edit?id='+value.userId+'>Edit</a>' +'||'+ '<a href=activateAcc?id='+value.userId+'>Active</a>';
@@ -50,6 +50,9 @@ $("#user_table").empty();
                 });
           });
 		});
+function deleteConfirm(){
+	return confirm("Are you sure, you want to delete?");
+}
 </script>
 </head>
 <body>
