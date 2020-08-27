@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.his.admin.dtos.PlanDTO;
@@ -40,6 +43,14 @@ public class PlanServiceImpl implements IPlanService {
 					   .stream()
 					   .map(PlanMapper::convertPlanEntityToPlanDTO)
 					   .collect(Collectors.toList());
+	}
+	
+	@Override
+	public Page<PlanDTO> getAllPlansWithPaginationAndSorting(int pageNo, int pageSize) {
+		//Create Pageable using pageNo and pageSize
+		Pageable pageable = PageRequest.of(pageNo-1, pageSize);
+		return planRepo.findAll(pageable)
+					   .map(PlanMapper::convertPlanEntityToPlanDTO);
 	}
 	
 	@Override

@@ -2,6 +2,7 @@ package com.his.admin.controller;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -49,6 +50,17 @@ public class PlanEntityController {
 			return "planDataView";
 		}
 		map.addAttribute("listPlans", allPlans);
+		return "planDataView";
+	}
+	
+	@GetMapping("/viewPlansPaging")
+	public String getAllPlansWithPagingAndSorting(@RequestParam("pageNo")int pageNo,@RequestParam("pageSize")int pageSize,ModelMap map){
+		Page<PlanDTO> page = planService.getAllPlansWithPaginationAndSorting(pageNo, pageSize);
+		map.addAttribute("listPlans", page.getContent());
+		map.addAttribute("totalPages", page.getTotalPages());
+		map.addAttribute("hasNext", page.hasNext());
+		map.addAttribute("hasPrevious", page.hasPrevious());
+		map.addAttribute("currentPage", page.getNumber());
 		return "planDataView";
 	}
 	
