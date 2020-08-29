@@ -27,6 +27,7 @@ public class UserEntityController {
 
 	@PostMapping("/createUser")
 	public String createUser(@ModelAttribute("userDTO")UserDTO userDTO,ModelMap map) {
+		
 		Boolean isSaved = userService.saveUser(userDTO);
 		
 		if(isSaved)

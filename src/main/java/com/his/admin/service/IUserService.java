@@ -3,6 +3,7 @@ package com.his.admin.service;
 import java.util.List;
 
 import com.his.admin.dtos.UserDTO;
+import com.his.admin.model.Role;
 import com.his.admin.model.UnlockAccount;
 
 public interface IUserService {
@@ -23,5 +24,5 @@ public interface IUserService {
 	
 	public void activeAccountById(Long id);	
 	
-	public List<String> getAllRoles();
+	public List<Role> getAllRoles();
 }

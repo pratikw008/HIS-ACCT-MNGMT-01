@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.his.admin.dtos.UserDTO;
 import com.his.admin.service.IUserService;
@@ -29,11 +28,12 @@ public class ViewAccountsController {
 	}
 	
 	@GetMapping("/getUserByRole")
-	@ResponseBody
-	public List<UserDTO> getUserByRole(@RequestParam("role") String role) {
-		return userService.findByRole(role);
-						  //.stream()
-						  //.collect(Collectors.toMap(UserDTO::getUserId, usrDTO->usrDTO));
+	public String getUserByRole(@RequestParam("role") String role, ModelMap map) {
+		List<UserDTO> listUsers = userService.findByRole(role);
+		map.addAttribute("role", role);
+		map.addAttribute("listUsers", listUsers);
+		map.addAttribute("roles", userService.getAllRoles());
+		return "viewAccounts";
 	}
 	
 	@GetMapping("/edit")
@@ -61,7 +61,7 @@ public class ViewAccountsController {
 		return "redirect:/viewAccounts";
 	}
 	
-	@GetMapping("/activateAcc")
+	@GetMapping("/active")
 	public String activateAcctById(@RequestParam("id")Long id) {
 		userService.activeAccountById(id);
 		return "redirect:/viewAccounts";

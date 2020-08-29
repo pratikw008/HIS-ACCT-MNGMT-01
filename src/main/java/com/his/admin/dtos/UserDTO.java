@@ -3,6 +3,7 @@ package com.his.admin.dtos;
 import com.his.admin.model.AccountState;
 import com.his.admin.model.AccountStatus;
 import com.his.admin.model.Gender;
+import com.his.admin.model.Role;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,7 +26,7 @@ public class UserDTO {
 	
 	private Gender gender;
 	
-	private String role;
+	private Role role;
 	
 	private AccountStatus accountStatus;
 	

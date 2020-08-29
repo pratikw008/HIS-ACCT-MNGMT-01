@@ -54,7 +54,10 @@ public class PlanEntityController {
 	}
 	
 	@GetMapping("/viewPlansPaging")
-	public String getAllPlansWithPagingAndSorting(@RequestParam("pageNo")int pageNo,@RequestParam("pageSize")int pageSize,ModelMap map){
+	public String getAllPlansWithPagingAndSorting(@RequestParam(name = "pageNo", defaultValue = "1")int pageNo,
+												  @RequestParam(name = "pageSize", defaultValue = "3")int pageSize,
+												  ModelMap map){
+		System.out.println(pageSize);
 		Page<PlanDTO> page = planService.getAllPlansWithPaginationAndSorting(pageNo, pageSize);
 		map.addAttribute("listPlans", page.getContent());
 		map.addAttribute("totalPages", page.getTotalPages());

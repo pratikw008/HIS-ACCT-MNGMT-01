@@ -34,7 +34,7 @@
 					<td><form:label path="role" /><b>Role:</b>
 					<td><form:select path="role">
 							<form:option value="">--Select--</form:option>
-							<form:options items="${roles}" />
+							<form:options items="${roles}" itemLabel="name" itemValue="roleId"/>
 						</form:select></td>
 				</tr>
 				<tr>

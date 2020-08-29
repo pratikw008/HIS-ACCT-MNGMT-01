@@ -25,4 +25,11 @@ public class Role {
 	
 	@Column(name = "ROLE_NAME")
 	private String name;
+
+	public Role(Long roleId) {
+		super();
+		this.roleId = roleId;
+	}
+
+	
 }

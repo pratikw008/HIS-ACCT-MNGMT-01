@@ -8,23 +8,33 @@
 <title>View All Plan Data</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
-/* $(document).ready(function() {
+$(document).ready(function() {
 	
 	$("#pageSize").change(function(){
 			
 		var pageSize = $('#pageSize').val();
 		console.log(pageSize);
+
 		var old = '&pageSize=3'+pageSize;
-		 $('a').click(function () {
-		        $(this).attr('href',$(this).attr('href').replace(old, newValue));
-		    });
-		$('a#pageSize').attr('href', function(index, attr) {
+
+		$(".aClass").each(function(){ 
+            var oldUrl = $(this).attr("href"); // Get current url
+            console.log(oldUrl);
+           	var newUrl = oldUrl.replace("&pageSize=", "&pageSize="+pageSize); // Create new url
+            $(this).attr("href", newUrl); // Set herf value
+        });
+		
+		 //$('a').click(function () {
+		        //$(this).attr('href',$(this).attr('href').replace(old, newValue));
+		        //$('a').attr("href","&pageSize=" + $(this.val());
+		   // });
+		/* $('a#pageSize').attr('href', function(index, attr) {
 		    return attr + '&' + pageSize;
-		});
+		}); */
 		console.log(pageSize)
 		alert(pageSize);
 	});
-}); */
+});
 </script>
 <script type="text/javascript">
 function deleteConfirm() {
@@ -105,7 +115,13 @@ function deleteConfirm() {
 					&nbsp;
 					&nbsp;
 					<c:forEach begin="1" end="${totalPages}" var="i" varStatus="index">
-						<a href="viewPlansPaging?pageNo=${index.count}&pageSize=3">${index.count}</a>
+						<c:if test="${currentPage+1 == i}">
+							${i}
+						</c:if>
+						<c:if test="${currentPage+1 != i}">
+							<a class="aClass" href="viewPlansPaging?pageNo=${i}&pageSize=3">${i}</a>
+						</c:if>
+						
 					</c:forEach>
 				</c:if>
 					&nbsp;

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.his.admin.dtos.UserDTO;
 import com.his.admin.model.AccountState;
 import com.his.admin.model.AccountStatus;
+import com.his.admin.model.Role;
 import com.his.admin.model.UnlockAccount;
 import com.his.admin.model.UserEntity;
 import com.his.admin.repository.RoleRepository;
@@ -116,9 +117,10 @@ public class UserServiceImpl implements IUserService {
 	}
 	
 	@Override
-	public List<String> getAllRoles() {
-		return roleRepo.findAll().stream()
-					   			 .map(role -> role.getName())
-					   			 .collect(Collectors.toList());
+	public List<Role> getAllRoles() {
+		System.out.println(roleRepo.findAll());
+		return roleRepo.findAll();//.stream()
+					   			 //.map(role -> role.getName())
+					   			 //.collect(Collectors.toList());
 	}
 }

@@ -14,7 +14,7 @@
 <script
 	src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"
 	type="text/javascript"></script>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 $(document).ready(function() {
 
 $("#role").change(function(){
@@ -53,12 +53,19 @@ $("#user_table").empty();
 function deleteConfirm(){
 	return confirm("Are you sure, you want to delete?");
 }
+</script> -->
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#role').on('change', function() {
+			this.form.submit();
+		});
+	});
 </script>
 </head>
 <body>
-	<div align="center">
+	<%-- <div align="center">
 		<h1>View Accounts</h1>
-		<table>
+			<table>
 			<tr>
 				<td><b>Select Role:</b></td>
 				<td><select id="role">
@@ -78,6 +85,53 @@ function deleteConfirm(){
 				</tr>
 			</thead>
 			<tbody>
+			</tbody>
+		</table>
+	</div> --%>
+
+	<div align="center">
+		<h1>View Accounts</h1>
+		<form action="/getUserByRole">
+			<table>
+				<tr>
+					<td><b>Select Role:</b></td>
+					<td><select id="role" name="role">
+							<option value="">--Select--</option>
+							
+							<c:forEach var="role" items="${roles}">
+								
+								<option value="${role}" label="${role}"/>
+							</c:forEach>
+					</select></td>
+				</tr>
+			</table>
+		</form>
+		<table id="user_table" border="1">
+			<thead>
+				<tr>
+					<th>S.No</th>
+					<th>Name</th>
+					<th>Email</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach var="user" items="${listUsers}" varStatus="index">
+					<tr>
+						<td><c:out value="${index.count}"/></td>
+						<td><c:out value="${user.firstName} ${user.lastName}"/></td>
+						<td><c:out value="${user.email}"/></td>
+						<td>
+							<a href="edit?id=${user.userId}">Edit</a>
+							<c:if test="${user.accountState == 'ACTIVE'}">
+								<a href="delete?id=${user.userId}">Delete</a>
+							</c:if>
+							<c:if test="${user.accountState == 'INACTIVE'}">
+								<a href="active?id=${user.userId}">Active</a>
+							</c:if>
+						</td>
+					</tr>
+				</c:forEach>
 			</tbody>
 		</table>
 	</div>

@@ -9,17 +9,30 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.his.admin.model.AccountState;
+import com.his.admin.model.AccountStatus;
+import com.his.admin.model.Gender;
 import com.his.admin.model.PlanAccountState;
 import com.his.admin.model.PlanEntity;
+import com.his.admin.model.UserEntity;
 import com.his.admin.repository.PlanEntityRepository;
+import com.his.admin.repository.RoleRepository;
+import com.his.admin.repository.UserRepository;
 
 @SpringBootApplication
 public class HisAdminApplication implements CommandLineRunner{
 
 	private PlanEntityRepository planRepo;
 	
-	public HisAdminApplication(PlanEntityRepository planRepo) {
+	private UserRepository userRepo;
+	
+	private RoleRepository roleRepo;
+
+	public HisAdminApplication(PlanEntityRepository planRepo, UserRepository userRepo, RoleRepository roleRepo) {
+		super();
 		this.planRepo = planRepo;
+		this.userRepo = userRepo;
+		this.roleRepo = roleRepo;
 	}
 
 	public static void main(String[] args) {
@@ -42,5 +55,15 @@ public class HisAdminApplication implements CommandLineRunner{
 												new PlanEntity(111l,"GSD","GSD",LocalDate.of(2020, 8, 26),LocalDate.of(2021,8, 26),PlanAccountState.ACTIVE,LocalDateTime.now(),null)
 				);
 		planRepo.saveAll(planEntities);
+		
+		
+		  List<UserEntity> entities = Arrays.asList( new UserEntity(1l, "Virat", "Kohli", "vk@g.com", "vk123",Gender.MALE, 
+				  roleRepo.findById(102l).get(), AccountStatus.UNLOCKED, AccountState.ACTIVE,
+				  						LocalDateTime.now(), null),
+				  		 new UserEntity(2l, "Rohit", "Sharma", "hitman@g.com", "hitman123",Gender.MALE, 
+				  				roleRepo.findById(101l).get(), AccountStatus.UNLOCKED, AccountState.ACTIVE,
+	  						LocalDateTime.now(), null));
+		  
+		  userRepo.saveAll(entities);
 	}
 }
