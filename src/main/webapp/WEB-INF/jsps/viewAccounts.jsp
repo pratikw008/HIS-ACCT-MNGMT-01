@@ -99,8 +99,7 @@ function deleteConfirm(){
 							<option value="">--Select--</option>
 							
 							<c:forEach var="role" items="${roles}">
-								
-								<option value="${role}" label="${role}"/>
+								<option value="${role.name}" label="${role.name}" />
 							</c:forEach>
 					</select></td>
 				</tr>

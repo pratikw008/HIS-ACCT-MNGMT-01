@@ -28,7 +28,9 @@ public class ViewAccountsController {
 	}
 	
 	@GetMapping("/getUserByRole")
-	public String getUserByRole(@RequestParam("role") String role, ModelMap map) {
+	public String getUserByRole(@RequestParam(value = "role",defaultValue = "CASE WORKER") String role, ModelMap map) {
+		System.out.println(role);
+		
 		List<UserDTO> listUsers = userService.findByRole(role);
 		map.addAttribute("role", role);
 		map.addAttribute("listUsers", listUsers);

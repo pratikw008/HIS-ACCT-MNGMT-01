@@ -53,7 +53,7 @@ public class UserServiceImpl implements IUserService {
 	
 	@Override
 	public List<UserDTO> findByRole(String role) {
-		return userRepo.findByRole(role)
+		return userRepo.findByRole_Name(role)
 					   .stream()
 					   .map(UserMapper::convertUserEntityToUserDTO)
 					   .collect(Collectors.toList()); 
@@ -118,9 +118,9 @@ public class UserServiceImpl implements IUserService {
 	
 	@Override
 	public List<Role> getAllRoles() {
-		System.out.println(roleRepo.findAll());
-		return roleRepo.findAll();//.stream()
-					   			 //.map(role -> role.getName())
-					   			 //.collect(Collectors.toList());
+		return roleRepo.findAll();
+					   //.stream()
+					   //.map(role -> role.getName())
+					   //.collect(Collectors.toList());
 	}
 }
