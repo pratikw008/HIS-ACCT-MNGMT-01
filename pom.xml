@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.his.admin</groupId>
-	<artifactId>his-admin</artifactId>
+	<artifactId>his</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>his-admin</name>
-	<description>Health Insurance System Admin Module</description>
+	<name>heath-insurance-system</name>
+	<description>Health Insurance System</description>
 
 	<properties>
 		<java.version>1.8</java.version>

@@ -91,7 +91,7 @@ function deleteConfirm(){
 
 	<div align="center">
 		<h1>View Accounts</h1>
-		<form action="/getUserByRole">
+		<form action="/viewAccounts">
 			<table>
 				<tr>
 					<td><b>Select Role:</b></td>

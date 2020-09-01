@@ -54,7 +54,7 @@
 				</tr>
 				<tr>
 					<td></td>
-					<td><input type="submit" value="Create" style="height:30px; width:100px; background-color:green; font-size:100%; color:white;"></td>					
+					<td><input type="submit" value="Update User" style="height:30px; width:106px; background-color:green; font-size:100%; color:white; text-align:center;"></td>					
 				</tr>
 			</table>
 		</form:form>

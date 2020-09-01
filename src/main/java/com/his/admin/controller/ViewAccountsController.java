@@ -21,20 +21,20 @@ public class ViewAccountsController {
 		this.userService = userService;
 	}
 	
-	@GetMapping("/viewAccounts")
-	public String showViewAccounts(ModelMap map) {
-		map.addAttribute("roles", userService.getAllRoles());
-		return "viewAccounts";
-	}
+	/*
+	 * @GetMapping("/viewAccounts") public String showViewAccounts(ModelMap map) {
+	 * map.addAttribute("roles", userService.getAllRoles()); return "viewAccounts";
+	 * }
+	 */
 	
-	@GetMapping("/getUserByRole")
+	@GetMapping("/viewAccounts")
 	public String getUserByRole(@RequestParam(value = "role",defaultValue = "CASE WORKER") String role, ModelMap map) {
 		System.out.println(role);
 		
 		List<UserDTO> listUsers = userService.findByRole(role);
-		map.addAttribute("role", role);
-		map.addAttribute("listUsers", listUsers);
+		//map.addAttribute("role", role);
 		map.addAttribute("roles", userService.getAllRoles());
+		map.addAttribute("listUsers", listUsers);
 		return "viewAccounts";
 	}
 	
