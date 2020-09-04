@@ -14,46 +14,7 @@
 <script
 	src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"
 	type="text/javascript"></script>
-<!-- <script type="text/javascript">
-$(document).ready(function() {
 
-$("#role").change(function(){
-$("#user_table").empty();
-		$("#role").find('table').remove();
-		var role=$("#role").val();
-		  $.ajax({
-                 type :"GET",
-                   url  : "getUserByRole?role="+role,
-                   success : function(res){
-                	   var tr = '';
-                	   var action='';
-               		   var table =' <table id="response_table" border="1"><thead> <tr><th>Name</th><th>Email</th><th>Action</th></tr></thead><tbody>'; 
-               
-						$.each(res,function(key,value){
-
-                        	var state = value.accountState;
-
-                            if(state ==='ACTIVE'){
-								action='<a href=edit?id='+value.userId+'>Edit</a>' +'||'+ '<a href=delete?id='+value.userId+' onClick=return deleteConfirm()>Delete</a>';
-							} 
-							else{
-	                        	action='<a href=edit?id='+value.userId+'>Edit</a>' +'||'+ '<a href=activateAcc?id='+value.userId+'>Active</a>';
-		                    }   	
-                            table += '<tr><td>' + value.firstName + '</td><td>' + value.email + '</td><td>' +action + '</td></tr>';
-                        });
-
-                        table += '  </tbody> </table>';
-
-   	                	$('#user_table').append(table);
-                                       // $('#response_table tbody').html(tr);
-                  }
-                });
-          });
-		});
-function deleteConfirm(){
-	return confirm("Are you sure, you want to delete?");
-}
-</script> -->
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('#role').on('change', function() {
@@ -63,32 +24,6 @@ function deleteConfirm(){
 </script>
 </head>
 <body>
-	<%-- <div align="center">
-		<h1>View Accounts</h1>
-			<table>
-			<tr>
-				<td><b>Select Role:</b></td>
-				<td><select id="role">
-						<option value="">--Select--</option>
-						<c:forEach var="role" items="${roles}">
-							<option value="${role}" label="${role}" />
-						</c:forEach>
-				</select></td>
-			</tr>
-		</table>
-		<table id="user_table" border="1">
-			<thead>
-				<tr>
-					<th>Name</th>
-					<th>Email</th>
-					<th>Action</th>
-				</tr>
-			</thead>
-			<tbody>
-			</tbody>
-		</table>
-	</div> --%>
-
 	<div align="center">
 		<h1>View Accounts</h1>
 		<form action="/viewAccounts">
@@ -122,10 +57,10 @@ function deleteConfirm(){
 						<td><c:out value="${user.email}"/></td>
 						<td>
 							<a href="edit?id=${user.userId}">Edit</a>
-							<c:if test="${user.accountState == 'ACTIVE'}">
+							<c:if test="${user.deleteState == 'ACTIVE'}">
 								<a href="delete?id=${user.userId}">Delete</a>
 							</c:if>
-							<c:if test="${user.accountState == 'INACTIVE'}">
+							<c:if test="${user.deleteState == 'INACTIVE'}">
 								<a href="active?id=${user.userId}">Active</a>
 							</c:if>
 						</td>

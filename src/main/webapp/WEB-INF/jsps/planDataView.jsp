@@ -6,33 +6,14 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>View All Plan Data</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-	
-	$("#pageSize").change(function(){
-			
-		var pageSize = $('#pageSize').val();
-		console.log(pageSize);
-
-		var old = '&pageSize=3'+pageSize;
-
-		$(".aClass").each(function(){ 
-            var oldUrl = $(this).attr("href"); // Get current url
-            console.log(oldUrl);
-           	var newUrl = oldUrl.replace("&pageSize=", "&pageSize="+pageSize); // Create new url
-            $(this).attr("href", newUrl); // Set herf value
-        });
-		
-		 //$('a').click(function () {
-		        //$(this).attr('href',$(this).attr('href').replace(old, newValue));
-		        //$('a').attr("href","&pageSize=" + $(this.val());
-		   // });
-		/* $('a#pageSize').attr('href', function(index, attr) {
-		    return attr + '&' + pageSize;
-		}); */
-		console.log(pageSize)
-		alert(pageSize);
+	$(document).ready(function() {
+		$("#pageSize").change(function() {	
+			$("#planForm").submit();
+		});
 	});
 });
 </script>
@@ -46,16 +27,15 @@ function deleteConfirm() {
 	<div align="center">
 		<div align="center">
 			<h1>View Plans</h1>
-			<table>
-				<tr>
-					<td><h3>Page Size::</h3></td>
-					<td><select id="pageSize" name="pageSize">
-							<option value="3" selected="selected">3</option>
-							<option value="5">5</option>
-							<option value="10">10</option>
-					</select></td>
-				</tr>
-			</table>
+			<form action="viewPlansPaging" method="get" id="planForm">
+				<label><b>Page Size::</b></label>
+				<select id="pageSize" name="pageSize">
+					<option value="">--Select--</option>
+					<option value="3">3</option>
+					<option value="5">5</option>
+					<option value="10">10</option>
+				</select>
+			</form>
 		</div>
 		<div align="center">
 			<table border="1">
@@ -80,10 +60,10 @@ function deleteConfirm() {
 									<td><c:out value="${plan.planStartDate}" /></td>
 									<td><c:out value="${plan.planEndDate}" /></td>
 									<td><a href="/editPlan?id=${plan.planId}">Edit</a> <c:if
-											test="${plan.planAccountState == 'ACTIVE'}">
+											test="${plan.deleteState == 'ACTIVE'}">
 											<a href="/deletePlan?id=${plan.planId}"
 												onclick="return deleteConfirm()">Delete</a>
-										</c:if> <c:if test="${plan.planAccountState == 'INACTIVE'}">
+										</c:if> <c:if test="${plan.deleteState == 'INACTIVE'}">
 											<a href="/activePlan?id=${plan.planId}">Active</a>
 										</c:if></td>
 								</tr>
@@ -100,39 +80,36 @@ function deleteConfirm() {
 		</div>
 		<div align="center">
 			<c:if test="${totalPages > 1}">
-					<b>Total Pages::</b>				
-					<c:out value="${totalPages}" />
+				<b>Total Pages::</b>
+				<c:out value="${totalPages}" />
 					&nbsp;
 					&nbsp;
 					&nbsp;
 					<c:if test="${hasPrevious}">
-						<c:set var="previousPage" value="${currentPage+1}" ></c:set>
-						<a href="viewPlansPaging?pageNo=${previousPage-1}&pageSize=3">Previous</a>
-					</c:if>
-					<c:if test="${!hasPrevious}">
-						<a>Previous</a>
-					</c:if>
-					&nbsp;
-					&nbsp;
-					<c:forEach begin="1" end="${totalPages}" var="i" varStatus="index">
-						<c:if test="${currentPage+1 == i}">
-							${i}
-						</c:if>
-						<c:if test="${currentPage+1 != i}">
-							<a class="aClass" href="viewPlansPaging?pageNo=${i}&pageSize=3">${i}</a>
-						</c:if>
-						
-					</c:forEach>
+					<a href="viewPlansPaging?pageNo=${currentPage-1}&pageSize=${pageSize}">Previous</a>
+				</c:if>
+				<c:if test="${!hasPrevious}">
+					<a>Previous</a>
 				</c:if>
 					&nbsp;
 					&nbsp;
-					<c:if test="${hasNext}">
-						<c:set var="nextPage" value="${currentPage+1}"></c:set>
-						<a href="viewPlansPaging?pageNo=${nextPage+1}&pageSize=3">Next</a>
+					<c:forEach begin="1" end="${totalPages}" var="i" varStatus="index">
+					<c:if test="${currentPage == i}">
+							${i}
+						</c:if>
+					<c:if test="${currentPage != i}">
+						<a class="aClass" href="viewPlansPaging?pageNo=${i}&pageSize=${pageSize}">${i}</a>
 					</c:if>
-					<c:if test="${!hasNext}">
-						<a>Next</a>
-					</c:if>
+
+				</c:forEach>
+			</c:if>
+			&nbsp; &nbsp;
+			<c:if test="${hasNext}">
+				<a href="viewPlansPaging?pageNo=${currentPage+1}&pageSize=${pageSize}">Next</a>
+			</c:if>
+			<c:if test="${!hasNext}">
+				<a>Next</a>
+			</c:if>
 		</div>
 	</div>
 </body>

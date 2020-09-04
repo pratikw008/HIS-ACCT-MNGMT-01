@@ -49,8 +49,8 @@
 					<td><form:input path="accountStatus" readonly="true"/></td>
 				</tr>
 				<tr>
-					<td><form:label path="accountState" /><b>Account State:</b>
-					<td><form:input path="accountState" readonly="true"/></td>
+					<td><form:label path="deleteState" /><b>Account State:</b>
+					<td><form:input path="deleteState" readonly="true"/></td>
 				</tr>
 				<tr>
 					<td></td>

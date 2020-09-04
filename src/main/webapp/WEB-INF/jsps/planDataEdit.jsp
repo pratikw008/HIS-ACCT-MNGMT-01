@@ -57,10 +57,10 @@
 					<td><form:input path="planEndDate" class="datepicker" /></td>
 				</tr>
 				<tr>
-					<td><form:label path="planAccountState">
+					<td><form:label path="deleteState">
 							<b>Plan State:</b>
 						</form:label></td>
-					<td><form:input path="planAccountState" readonly="true"/></td>
+					<td><form:input path="deleteState" readonly="true"/></td>
 				</tr>
 				<tr>
 					<td></td>
