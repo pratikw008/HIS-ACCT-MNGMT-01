@@ -14,7 +14,7 @@ $(function() {
 
 			planName: {
 				required: true,
-				minlength: 5
+				minlength: 3
 			},
 			planDescription: {
 				required: true,
